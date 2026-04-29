@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ouvidoria | Agropecuária Zecão</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        :root {
+            --primary: #1b4332;
+            --primary-light: #2d6a4f;
+            --accent: #40916c;
+            --bg: #fdfdfd;
+            --surface: #ffffff;
+            --text: #1a1a1a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .hero {
+            padding: 6rem 0 8rem;
+            text-align: center;
+            background: radial-gradient(circle at top right, #f0fdf4, transparent), var(--bg);
+        }
+
+        .hero-tagline {
+            color: var(--accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+            display: block;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            font-size: 1.25rem;
+            color: var(--text-muted);
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 10px 20px rgba(27, 67, 50, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: #f1f5f9;
+        }
+
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            color: var(--primary-light);
+            font-size: 0.95rem;
+        }
+
+        section {
+            padding: 5rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .section-num {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .section-title h2 {
+            font-size: 2.25rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+
+        /* Grid Princípios */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .principle-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .principle-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .principle-card h4 {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Grid Manifestações */
+        .manifestation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .manifestation-item {
+            background: white;
+            padding: 1.25rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+        }
+
+        .manifestation-item span {
+            width: 28px;
+            height: 28px;
+            background: #eaf4f0;
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        /* Fluxo de Atendimento */
+        .flow-container {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 2px dashed var(--border);
+            margin-left: 1rem;
+        }
+
+        .flow-step {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .flow-step::before {
+            content: '';
+            position: absolute;
+            left: -2.7rem;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border: 4px solid white;
+            border-radius: 50%;
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+
+        .flow-content h4 {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Tabela de Prazos */
+        .deadline-box {
+            margin-top: 3rem;
+            background: var(--primary);
+            color: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .deadline-item {
+            text-align: center;
+        }
+
+        .deadline-item strong {
+            display: block;
+            font-size: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .deadline-item span {
+            opacity: 0.8;
+            font-size: 0.875rem;
+        }
+
+        /* Info Banners */
+        .info-footer {
+            background: #f1f5f9;
+            padding: 3rem;
+            border-radius: var(--radius);
+            margin-top: 4rem;
+        }
+
+        .info-footer h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem 0;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 4rem 0;
+            }
+
+            .deadline-box {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <span class="hero-tagline">Sua voz importa. Sempre ouvida, nunca exposta.</span>
+            <h1>Ouvidoria Interna <span>Agropecuária Zecão</span></h1>
+            <p>Um espaço seguro, sigiloso e imparcial para que todo colaborador possa registrar manifestações
+                relacionadas ao ambiente de trabalho.</p>
+
+            <div class="hero-btns">
+                <button class="btn btn-primary" onclick="alert('Formulário em desenvolvimento')">
+                    <i class="ph ph-paper-plane-tilt"></i> Registrar manifestação
+                </button>
+                <a href="#objetivo" class="btn btn-outline">Saber mais</a>
+            </div>
+
+            <div class="hero-features">
+                <div class="feature-item"><i class="ph-fill ph-mask-happy"></i> Anônimo ou identificado</div>
+                <div class="feature-item"><i class="ph-fill ph-shield-check"></i> Conforme LGPD</div>
+                <div class="feature-item"><i class="ph-fill ph-hand-fist"></i> Não retaliação</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section id="objetivo">
+            <span class="section-num">01 · Objetivo</span>
+            <div class="section-title">
+                <h2>O que é a Ouvidoria Interna</h2>
+                <p>O canal de escuta ativa que apoia a nossa gestão e garante a segurança de todos.</p>
+            </div>
+            <div style="max-width: 800px;">
+                <p style="margin-bottom: 1.5rem;">Receber, analisar e tratar manifestações relacionadas a condutas
+                    inadequadas, riscos ocupacionais, assédio e conflitos.</p>
+                <p style="margin-bottom: 1.5rem;"><strong>Apoio à NR-1:</strong> Este canal atua como ferramenta de
+                    apoio à gestão de riscos psicossociais, conforme a Norma Regulamentadora nº 1.</p>
+                <p><strong>Abrangência:</strong> Aplica-se a todos os colaboradores, independentemente de cargo, função
+                    ou vínculo com a empresa.</p>
+            </div>
+        </section>
+
+        <section>
+            <span class="section-num">02 · Princípios</span>
+            <div class="section-title">
+                <h2>Os pilares que sustentam o canal</h2>
+            </div>
+            <div class="principles-grid">
+                <div class="principle-card"><i class="ph ph-lock-key"></i>
+                    <h4>Confidencialidade</h4>
+                </div>
+                <div class="principle-card"><i class="ph ph-scales"></i>
+                    <h4>Imparcialidade</h4>
+                </div>
+                <div class="principle-card"><i class="ph ph-eye"></i>
+                    <h4>Transparência</h4>
+                </div>
+                <div class="principle-card"><i class="ph ph-shield-check"></i>
+                    <h4>Não Retaliação</h4>
+                </div>
+                <div class="principle-card"><i class="ph ph-tree-structure"></i>
+                    <h4>Independência</h4>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <span class="section-num">03 · Tipos de Manifestação</span>
+            <div class="section-title">
+                <h2>O que pode ser relatado</h2>
+                <p>Use este canal para reportar situações que afetem o ambiente de trabalho ou a integridade pessoal.
+                </p>
+            </div>
+            <div class="manifestation-grid">
+                <div class="manifestation-item"><span>01</span> Assédio moral</div>
+                <div class="manifestation-item"><span>02</span> Assédio sexual</div>
+                <div class="manifestation-item"><span>03</span> Discriminação</div>
+                <div class="manifestation-item"><span>04</span> Condutas inadequadas</div>
+                <div class="manifestation-item"><span>05</span> Conflitos interpessoais</div>
+                <div class="manifestation-item"><span>06</span> Riscos à saúde e segurança</div>
+                <div class="manifestation-item"><span>07</span> Descumprimento de normas</div>
+                <div class="manifestation-item"><span>08</span> Sugestões de melhoria</div>
+            </div>
+        </section>
+
+        <section>
+            <span class="section-num">04 · Fluxo de Atendimento</span>
+            <div class="section-title">
+                <h2>Como sua manifestação é tratada</h2>
+                <p>Conheça o caminho que o seu relato percorre até a resolução final.</p>
+            </div>
+
+            <div class="flow-container">
+                <div class="flow-step">
+                    <div class="flow-content">
+                        <h4>01. Registro da manifestação</h4>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-content">
+                        <h4>02. Geração de protocolo</h4>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-content">
+                        <h4>03. Classificação e priorização</h4>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-content">
+                        <h4>04. Análise inicial</h4>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-content">
+                        <h4>05. Investigação (quando aplicável)</h4>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-content">
+                        <h4>06. Definição de ações</h4>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-content">
+                        <h4>07. Retorno ao manifestante</h4>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-content">
+                        <h4>08. Encerramento e registro</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="deadline-box">
+                <div class="deadline-item">
+                    <span>Confirmação</span>
+                    <strong>Imediata</strong>
+                </div>
+                <div class="deadline-item">
+                    <span>Análise inicial</span>
+                    <strong>Até 3 dias úteis</strong>
+                </div>
+                <div class="deadline-item">
+                    <span>Resposta</span>
+                    <strong>Até 15 dias úteis</strong>
+                </div>
+            </div>
+        </section>
+
+        <div class="info-footer">
+            <div style="margin-bottom: 2rem;">
+                <h4><i class="ph-fill ph-lock-laminated"></i> Confidencialidade & LGPD</h4>
+                <p>Todas as informações são tratadas com sigilo, em conformidade com a Lei Geral de Proteção de Dados. O
+                    anonimato é garantido quando escolhido pelo manifestante, sendo vedada qualquer tentativa de
+                    identificação indevida.</p>
+            </div>
+            <div>
+                <h4><i class="ph-fill ph-warning"></i> Não Retaliação</h4>
+                <p>É expressamente proibida qualquer forma de retaliação contra colaboradores que utilizarem o canal de
+                    boa-fé. Qualquer tentativa de retaliação será tratada como falta grave.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Agropecuária Zecão. Canal estruturado em conformidade com a NR-1.</p>
+    </footer>
+
+</body>
+
+</html>
