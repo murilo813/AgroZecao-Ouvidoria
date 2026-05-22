@@ -9,7 +9,6 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
-
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
@@ -99,6 +98,7 @@
             gap: 8px;
             cursor: pointer;
             border: none;
+            font-size: 1rem;
         }
 
         .btn-primary {
@@ -113,7 +113,7 @@
         }
 
         .btn-outline {
-            background: transparent;
+            background: white;
             color: var(--primary);
             border: 2px solid var(--primary);
         }
@@ -165,7 +165,6 @@
             max-width: 600px;
         }
 
-        /* Grid Princípios */
         .principles-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -191,7 +190,6 @@
             color: var(--primary);
         }
 
-        /* Grid Manifestações */
         .manifestation-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -222,7 +220,6 @@
             flex-shrink: 0;
         }
 
-        /* Fluxo de Atendimento */
         .flow-container {
             position: relative;
             padding-left: 2rem;
@@ -253,7 +250,6 @@
             font-weight: 700;
         }
 
-        /* Tabela de Prazos */
         .deadline-box {
             margin-top: 3rem;
             background: var(--primary);
@@ -268,6 +264,8 @@
 
         .deadline-item {
             text-align: center;
+            flex: 1;
+            min-width: 150px;
         }
 
         .deadline-item strong {
@@ -281,7 +279,6 @@
             font-size: 0.875rem;
         }
 
-        /* Info Banners */
         .info-footer {
             background: #f1f5f9;
             padding: 3rem;
@@ -301,6 +298,157 @@
             font-size: 0.875rem;
         }
 
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-box {
+            background: var(--surface);
+            width: 90%;
+            max-width: 500px;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .modal-title {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .result-box {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .result-icon {
+            font-size: 4rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .code-display {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 5px;
+            color: var(--primary);
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            background: #eaf4f0;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .obs-box {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: left;
+            font-size: 0.95rem;
+            border: 1px solid var(--border);
+            margin-top: 1rem;
+        }
+
         @media (max-width: 768px) {
             .hero {
                 padding: 4rem 0;
@@ -308,7 +456,23 @@
 
             .deadline-box {
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: center;
+                gap: 1.5rem;
+            }
+
+            .deadline-item {
+                text-align: center;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+                width: 100%;
+                padding: 0 2rem;
+            }
+
+            .hero-btns .btn {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
@@ -324,10 +488,12 @@
                 relacionadas ao ambiente de trabalho.</p>
 
             <div class="hero-btns">
-                <button class="btn btn-primary" onclick="alert('Formulário em desenvolvimento')">
-                    <i class="ph ph-paper-plane-tilt"></i> Registrar manifestação
+                <button class="btn btn-primary" onclick="openModal('modalManifestacao')">
+                    <i class="ph ph-paper-plane-tilt"></i> Nova manifestação
                 </button>
-                <a href="#objetivo" class="btn btn-outline">Saber mais</a>
+                <button class="btn btn-outline" onclick="openModal('modalPesquisa')">
+                    <i class="ph ph-magnifying-glass"></i> Acompanhar status
+                </button>
             </div>
 
             <div class="hero-features">
@@ -485,6 +651,254 @@
         <p>&copy; 2026 Agropecuária Zecão. Canal estruturado em conformidade com a NR-1.</p>
     </footer>
 
+    <div class="modal-overlay" id="modalManifestacao">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal('modalManifestacao')"><i class="ph ph-x"></i></button>
+
+            <div id="formContainer">
+                <h3 class="modal-title">Registrar Manifestação</h3>
+                <form id="formManifestacao">
+                    <div class="form-group">
+                        <label>Tipo de Manifestação *</label>
+                        <select class="form-control" id="tipoManifestacao" required>
+                            <option value="">Selecione um tipo...</option>
+                            <option value="Assédio moral">Assédio moral</option>
+                            <option value="Assédio sexual">Assédio sexual</option>
+                            <option value="Discriminação">Discriminação</option>
+                            <option value="Condutas inadequadas">Condutas inadequadas</option>
+                            <option value="Conflitos interpessoais">Conflitos interpessoais</option>
+                            <option value="Riscos à saúde e segurança">Riscos à saúde e segurança</option>
+                            <option value="Descumprimento de normas">Descumprimento de normas</option>
+                            <option value="Sugestões de melhoria">Sugestões de melhoria</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Deseja se identificar?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="identificacao" value="anonimo" checked
+                                    onchange="toggleNome(false)"> Anônimo
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="identificacao" value="identificado"
+                                    onchange="toggleNome(true)"> Identificado
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group hidden" id="boxNome">
+                        <label>Nome Completo *</label>
+                        <input type="text" class="form-control" id="nomeManifestante"
+                            placeholder="Digite seu nome completo">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Relato / Manifestação *</label>
+                        <textarea class="form-control" id="relatoManifestacao"
+                            placeholder="Descreva a situação com o máximo de detalhes possível..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Testemunhas (Opcional)</label>
+                        <input type="text" class="form-control" id="testemunhas"
+                            placeholder="Nomes de pessoas que presenciaram">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;"
+                        id="btnSubmitForm">
+                        Enviar Manifestação
+                    </button>
+                </form>
+            </div>
+
+            <div id="sucessoContainer" class="result-box hidden">
+                <i class="ph-fill ph-check-circle result-icon"></i>
+                <h3 class="modal-title" style="margin-bottom: 0.5rem;">Manifestação Enviada!</h3>
+                <p>Sua voz foi ouvida com segurança. Guarde o protocolo abaixo para consultar o status futuramente:</p>
+                <div class="code-display" id="codigoGerado">---</div>
+                <p style="font-size: 0.85rem; color: #dc2626; font-weight: 600;">Importante: Anote este código! Sem ele
+                    não será possível acompanhar o andamento.</p>
+                <button class="btn btn-outline" style="margin-top: 1.5rem; width: 100%; justify-content: center;"
+                    onclick="closeModal('modalManifestacao')">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modalPesquisa">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal('modalPesquisa')"><i class="ph ph-x"></i></button>
+
+            <div id="pesquisaBusca">
+                <h3 class="modal-title">Acompanhar Status</h3>
+                <p style="margin-bottom: 1.5rem; font-size: 0.95rem;">Insira o código de 5 dígitos recebido no momento
+                    do registro da sua manifestação.</p>
+
+                <form id="formPesquisa">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="inputCodigo" placeholder="Ex: A1B2C" required
+                            maxlength="5"
+                            style="text-transform: uppercase; text-align: center; font-size: 1.5rem; letter-spacing: 5px;">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;"
+                        id="btnPesquisar">
+                        Consultar Código
+                    </button>
+                </form>
+            </div>
+
+            <div id="pesquisaResultado" class="result-box hidden">
+                <span class="status-badge" id="resStatus">Em Análise</span>
+                <h3 class="modal-title" style="margin-bottom: 1rem; font-size: 1.25rem;">Detalhes da Manifestação</h3>
+
+                <div class="obs-box">
+                    <strong>Resposta / Observação:</strong><br>
+                    <span id="resObservacao">Sua manifestação está sendo apurada pela equipe responsável.</span>
+                </div>
+
+                <button class="btn btn-outline" style="margin-top: 1.5rem; width: 100%; justify-content: center;"
+                    onclick="resetPesquisa()">Fazer nova consulta</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'https://api.alembro.com:5005/manifestation';
+
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+            if (id === 'modalManifestacao') {
+                document.getElementById('formContainer').classList.remove('hidden');
+                document.getElementById('sucessoContainer').classList.add('hidden');
+                document.getElementById('formManifestacao').reset();
+                toggleNome(false);
+            } else if (id === 'modalPesquisa') {
+                resetPesquisa();
+            }
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        window.onclick = function (event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.classList.remove('active');
+            }
+        }
+
+        function toggleNome(mostrar) {
+            const boxNome = document.getElementById('boxNome');
+            const inputNome = document.getElementById('nomeManifestante');
+            if (mostrar) {
+                boxNome.classList.remove('hidden');
+                inputNome.required = true;
+            } else {
+                boxNome.classList.add('hidden');
+                inputNome.required = false;
+                inputNome.value = '';
+            }
+        }
+
+        document.getElementById('formManifestacao').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnSubmitForm');
+            btn.innerHTML = 'Enviando...';
+            btn.disabled = true;
+
+            const isIdentificado = document.querySelector('input[name="identificacao"]:checked').value === 'identificado';
+
+            const payload = {
+                type: document.getElementById('tipoManifestacao').value,
+                identified: isIdentificado,
+                name: isIdentificado ? document.getElementById('nomeManifestante').value : null,
+                description: document.getElementById('relatoManifestacao').value,
+                witnesses: document.getElementById('testemunhas').value || null
+            };
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    document.getElementById('formContainer').classList.add('hidden');
+                    document.getElementById('sucessoContainer').classList.remove('hidden');
+                    document.getElementById('codigoGerado').innerText = data.id;
+                } else {
+                    alert('Erro ao enviar manifestação. Tente novamente.');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro de conexão com o servidor Alembro.');
+            } finally {
+                btn.innerHTML = 'Enviar Manifestação';
+                btn.disabled = false;
+            }
+        });
+
+        document.getElementById('formPesquisa').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnPesquisar');
+            const codigo = document.getElementById('inputCodigo').value.toUpperCase();
+
+            btn.innerHTML = 'Buscando...';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch(`${API_URL}/${codigo}`);
+
+                if (response.ok) {
+                    const data = await response.json();
+
+                    document.getElementById('pesquisaBusca').classList.add('hidden');
+                    document.getElementById('pesquisaResultado').classList.remove('hidden');
+
+                    const statusMapping = {
+                        'concluido': 'Concluído',
+                        'analise': 'Em Análise'
+                    };
+
+                    const rawStatus = (data.status || 'analise').toLowerCase();
+                    const statusExibicao = statusMapping[rawStatus] || 'Em Análise';
+
+                    const statusBadge = document.getElementById('resStatus');
+                    statusBadge.innerText = statusExibicao;
+
+                    if (rawStatus === 'concluido') {
+                        statusBadge.style.backgroundColor = '#d1fae5';
+                        statusBadge.style.color = '#065f46';
+                    } else {
+                        statusBadge.style.backgroundColor = '#fef3c7';
+                        statusBadge.style.color = '#92400e';
+                    }
+
+                    document.getElementById('resObservacao').innerText = data.response || 'Sem observações no momento.';
+
+                } else if (response.status === 404) {
+                    alert('Código não encontrado. Verifique se digitou corretamente.');
+                } else {
+                    alert('Erro ao buscar a manifestação.');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro de conexão com o servidor Alembro.');
+            } finally {
+                btn.innerHTML = 'Consultar Código';
+                btn.disabled = false;
+            }
+        });
+
+        function resetPesquisa() {
+            document.getElementById('pesquisaBusca').classList.remove('hidden');
+            document.getElementById('pesquisaResultado').classList.add('hidden');
+            document.getElementById('formPesquisa').reset();
+        }
+    </script>
 </body>
 
 </html>
